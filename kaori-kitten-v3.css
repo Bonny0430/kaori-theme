@@ -452,45 +452,6 @@ body[data-ds-dark-theme] #kaori-cat {
   50% { transform: scale(1.03); }
 }
 
-/* ================= 高能区能量条（效果图B 概念，JS 注入）================= */
-.kaori-energy {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2147482990;
-  width: 240px;
-  height: 8px;
-  box-sizing: border-box;
-  border: 2px double #e8c76a;
-  border-radius: 5px;
-  background: rgba(26, 26, 46, 0.07);
-  pointer-events: none;
-  overflow: hidden;
-}
-.kaori-energy-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #7fbfe8 0%, #f5c542 55%, #ff9fb6 100%);
-  border-radius: 3px;
-  width: 8%;
-  transition: width 0.6s ease;
-  animation: energy-pulse 2s ease-in-out infinite;
-}
-.kaori-energy .kaori-energy-note {
-  position: absolute;
-  right: -24px;
-  top: -3px;
-  font-size: 14px;
-  line-height: 1;
-}
-body[data-ds-dark-theme] .kaori-energy {
-  background: rgba(255, 255, 255, 0.06);
-}
-@keyframes energy-pulse {
-  0%, 100% { opacity: 0.75; }
-  50% { opacity: 1; }
-}
-
 /* ================= 顶部台词（顶部偏右侧，JS 注入）================= */
 .kaori-top-caption {
   flex: none;
@@ -563,8 +524,7 @@ body.kaori-theme-off .kaori-theme-toggle {
 
 /* ================= 主题关闭态（JS 切 body.kaori-theme-off）================= */
 body.kaori-theme-off #kaori-petals,
-body.kaori-theme-off .kaori-companions,
-body.kaori-theme-off .kaori-energy {
+body.kaori-theme-off .kaori-companions {
   display: none !important;
 }
 

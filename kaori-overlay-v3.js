@@ -1,7 +1,7 @@
 // ============================================================
 // kaori-overlay-v3.js — 「四月与小猫」(April & Kitten) 装饰层 v3
 // 职责：樱花瓣、右上角薰角色卡(01-kaori.jpg)、左下角小猫(02-cat.jpg)、
-//       顶部高能区能量条、🎻 主题开关、作用域化深蓝侧边栏（效果图A）。
+//       🎻 主题开关、作用域化深蓝侧边栏（效果图A）。
 // 全部装饰层 pointer-events:none 不挡操作；角色卡/小猫/开关可点击。
 // 图片引用：/assets/images/（apply.ps1 会自动从主题目录复制）。
 // ============================================================
@@ -90,9 +90,7 @@
     host.appendChild(cat);
   }
 
-  // ========== 高能区：顶部能量条（效果图B 概念）==========
-  var energyTimer = null;
-
+  // ========== 框架定位工具（供侧边栏/详情面板判定使用）==========
   function findFrame() {
     var root = document.getElementById('root');
     if (!root) return null;
@@ -107,72 +105,6 @@
       for (var i = 0; i < el.children.length; i++) walk(el.children[i]);
     })(root);
     return found;
-  }
-
-  function findScrollContainer(root) {
-    var best = null;
-    var bestH = 0;
-    (function scan(el) {
-      var s = getComputedStyle(el);
-      if ((s.overflowY === 'auto' || s.overflowY === 'scroll') && el.clientHeight > 200 && el.scrollHeight > el.clientHeight) {
-        if (el.scrollHeight > bestH) { bestH = el.scrollHeight; best = el; }
-      }
-      for (var i = 0; i < el.children.length; i++) scan(el.children[i]);
-    })(root);
-    return best;
-  }
-
-  function countProgress() {
-    // 优先：轨迹面板的回合数（tr[data-turn-start="true"] 来自 dsh-client-ui-trajectory）
-    var turns = document.querySelectorAll('tr[data-turn-start="true"]').length;
-    if (turns > 0) return turns;
-    // 回退：中央对话滚动区里带文本的内容块数
-    var frame = findFrame();
-    if (frame && frame.children.length > 1) {
-      var scroll = findScrollContainer(frame.children[1]);
-      if (scroll) {
-        var n = 0;
-        for (var i = 0; i < scroll.children.length; i++) {
-          var c = scroll.children[i];
-          if (c.textContent && c.textContent.trim().length > 30 && c.getBoundingClientRect().height > 24) n++;
-        }
-        return n;
-      }
-    }
-    return 0;
-  }
-
-  function updateEnergy(fill, bar) {
-    var n = countProgress();
-    var energy = Math.min(100, 12 + n * 7);
-    fill.style.width = energy + '%';
-    bar.style.display = n > 0 ? 'block' : 'none';
-  }
-
-  function createEnergyBar() {
-    var bar = document.createElement('div');
-    bar.className = 'kaori-energy';
-    bar.style.display = 'none';
-
-    var fill = document.createElement('div');
-    fill.className = 'kaori-energy-fill';
-
-    var note = document.createElement('span');
-    note.className = 'kaori-energy-note';
-    note.textContent = '🎵';
-
-    bar.appendChild(fill);
-    bar.appendChild(note);
-    document.body.appendChild(bar);
-
-    updateEnergy(fill, bar);
-
-    // 监听消息/回合变化（挂在 body 上，防 SPA 重渲染）
-    var observer = new MutationObserver(function () {
-      clearTimeout(energyTimer);
-      energyTimer = setTimeout(function () { updateEnergy(fill, bar); }, 400);
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   // ========== 🎻 主题开关（返回按钮，由调用方决定放置位置）==========
@@ -326,7 +258,6 @@
       createCard(companions);
       createCat(companions);
       document.body.appendChild(companions);
-      createEnergyBar();
       var toggle = createToggle();
       placeHeaderDecor(toggle);
       scopeSidebar();
