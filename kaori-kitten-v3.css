@@ -574,6 +574,14 @@ body.kaori-details-open .kaori-companions {
   display: none !important;
 }
 
+/* ================= 预览面板打开时（kaori-preview 插件），隐藏右侧立绘/小猫 =================
+   预览面板是 fixed 右侧面板（z-index:1200，宽至 46vw），而右侧立绘/小猫
+   整组 z-index 高达 2147483001 —— 面板打开时它们会浮在预览区域之上。
+   插件打开面板会给 body 打 .kaori-preview-open 标，这里随标隐藏，关闭后恢复。 */
+body.kaori-preview-open .kaori-companions {
+  display: none !important;
+}
+
 /* ================= 模态浮层打开时（设置/图片预览等），隐藏顶部台词装饰 =================
    JS 检测 [role="dialog"][aria-modal="true"] 出现 → body 打 .kaori-modal-open 标，
    顶部台词（含 🎻 开关）不再浮在设置等浮层之上。 */
