@@ -298,11 +298,7 @@ select {
   border-radius: 10px;
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
-input:focus,
-textarea:focus,
-select:focus {
-  box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.22);
-}
+/* 聚焦柔光圈已移除：输入框聚焦时贴边出现的金色光晕像两个括号，不好看 */
 button:focus-visible {
   outline: 2px solid rgba(218, 165, 32, 0.55);
   outline-offset: 1px;
