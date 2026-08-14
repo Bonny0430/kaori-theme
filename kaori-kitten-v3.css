@@ -581,6 +581,15 @@ body.kaori-modal-open .kaori-top-decor {
   display: none !important;
 }
 
+/* ================= 预览面板打开时（kaori-preview 插件），隐藏顶部台词装饰 =================
+   kaori-preview 的预览面板是 fixed 右侧面板（z-index:1200，宽至 46vw），
+   而顶部台词装饰 z-index 高达 2147483002 —— 面板打开时台词会浮在预览区域之上。
+   插件打开面板会给 body 打 .kaori-preview-open 标，这里随标隐藏台词（含 🎻 开关），
+   关闭面板后自动恢复。 */
+body.kaori-preview-open .kaori-top-decor {
+  display: none !important;
+}
+
 /* ================= 自动化看板视图（dsh-automation 插件）：隐藏底部输入框 =================
    切到「自动化」标签时 JS 给 body 打 .kaori-automation-view 标。
    composer 座位（输入框容器）是对话视图的常驻元素，这里整体隐藏，
