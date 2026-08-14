@@ -24,7 +24,14 @@ foreach ($f in @('index.html', 'favicon.svg', 'manifest.webmanifest')) {
   }
 }
 
-# 2. 删除皮肤样式/脚本
+# 2. 删除 favicon.png（自定义 PNG 图标）
+$faviconPng = Join-Path $Dist 'favicon.png'
+if (Test-Path $faviconPng) {
+  Remove-Item $faviconPng -Force
+  Write-Host '[remove ] favicon.png'
+}
+
+# 3. 删除皮肤样式/脚本
 foreach ($f in @('kaori-kitten.css', 'kaori-overlay.js')) {
   $p = Join-Path $assets $f
   if (Test-Path $p) {
@@ -33,7 +40,7 @@ foreach ($f in @('kaori-kitten.css', 'kaori-overlay.js')) {
   }
 }
 
-# 3. 删除皮肤图片（kaori-* / cat-*）
+# 4. 删除皮肤图片（kaori-* / cat-*）
 $imgDst = Join-Path $assets 'images'
 if (Test-Path $imgDst) {
   Get-ChildItem $imgDst -Filter 'kaori-*' -ErrorAction SilentlyContinue | Remove-Item -Force

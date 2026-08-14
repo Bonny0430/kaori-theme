@@ -51,7 +51,10 @@ if ((Test-Path $manifest) -and -not (Test-Path (Join-Path $backup 'manifest.webm
 Copy-Item (Join-Path $src 'kaori-kitten-v3.css') (Join-Path $assets 'kaori-kitten.css') -Force
 Copy-Item (Join-Path $src 'kaori-overlay-v3.js')  (Join-Path $assets 'kaori-overlay.js') -Force
 Copy-Item (Join-Path $src 'favicon.svg')       (Join-Path $Dist 'favicon.svg') -Force
-Write-Host '[copy ] kaori-kitten-v3.css / kaori-overlay-v3.js / favicon.svg'
+if (Test-Path (Join-Path $src 'favicon.png')) {
+  Copy-Item (Join-Path $src 'favicon.png') (Join-Path $Dist 'favicon.png') -Force
+}
+Write-Host '[copy ] kaori-kitten-v3.css / kaori-overlay-v3.js / favicon.svg / favicon.png'
 
 # ---------- 3. 图片资源（images\* → dist\assets\images\） ----------
 $imgSrc = Join-Path $src 'images'
@@ -82,8 +85,25 @@ $titleMatch = [regex]::Match($html, '<title>[^<]*</title>')
 if ($titleMatch.Success -and -not $titleMatch.Value.Contains($kaori + ' v3')) {
   $html = $html.Replace($titleMatch.Value, '<title>' + $titleV3 + '</title>')
 }
+# favicon: 若存在 favicon.png 则把标签页图标切换为 PNG（幂等）
+$svgLink = '    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />'
+$pngLink = '    <link rel="icon" type="image/png" href="/favicon.png" />'
+if ((Test-Path (Join-Path $src 'favicon.png')) -and -not $html.Contains('/favicon.png')) {
+  $html = $html.Replace($svgLink, $pngLink)
+}
 [System.IO.File]::WriteAllText($index, $html, $utf8)
-Write-Host '[patch ] index.html: stylesheet + overlay script + title'
+Write-Host '[patch ] index.html: stylesheet + overlay script + title + favicon'
+
+# manifest.webmanifest: 图标指向 favicon.png（幂等）
+$manifest = Join-Path $Dist 'manifest.webmanifest'
+if (Test-Path $manifest) {
+  $m = [System.IO.File]::ReadAllText($manifest, [System.Text.Encoding]::UTF8)
+  if ($m.Contains('"/favicon.svg"') -and -not $m.Contains('"/favicon.png"')) {
+    $m = $m.Replace('"/favicon.svg"', '"/favicon.png"')
+    [System.IO.File]::WriteAllText($manifest, $m, $utf8)
+    Write-Host '[patch ] manifest.webmanifest: icon -> favicon.png'
+  }
+}
 
 Write-Host ''
 Write-Host 'v3 Applied! Refresh browser (Ctrl+F5) to see the theme.'
