@@ -505,12 +505,12 @@ body[data-ds-dark-theme] .kaori-top-caption {
   color: #9fb2c8;
 }
 /* 顶部偏右侧的固定容器（台词 + 开关）
-   放 top:48px / right:96px：避开头部行的「子代理/后台任务/Session log」按钮区（y≈12-44），
+   放 top:48px / right:160px：避开头部行的「子代理/后台任务/Session log」按钮区（y≈12-44），
    也不与右侧中部立绘（y 中部）冲突；台词组点击穿透，不挡按钮。 */
 .kaori-top-decor {
   position: fixed;
   top: 48px;
-  right: 96px;
+  right: 160px;
   left: auto;
   transform: none;
   z-index: 2147483002;
