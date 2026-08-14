@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb3cc"/>
+      <stop offset="1" stop-color="#f47fa8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 圆形底 -->
+  <circle cx="64" cy="64" r="64" fill="#ffe9f1"/>
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#ffc9db" stroke-width="3"/>
+
+  <!-- 猫耳 -->
+  <path d="M26 56 C22 28 40 20 54 29 C48 33 41 42 38 51 Z" fill="#f47fa8"/>
+  <path d="M102 56 C106 28 88 20 74 29 C80 33 87 42 90 51 Z" fill="#f47fa8"/>
+  <path d="M31 52 C28.5 36 38 30 46 34.5 C42 38 38 44 36.5 48.5 Z" fill="#ffc9db"/>
+  <path d="M97 52 C99.5 36 90 30 82 34.5 C86 38 90 44 91.5 48.5 Z" fill="#ffc9db"/>
+
+  <!-- 猫脸 -->
+  <circle cx="64" cy="72" r="40" fill="url(#face)"/>
+
+  <!-- 开心的眯眼 -->
+  <path d="M47 68 Q51 64 55 68" fill="none" stroke="#5c2440" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M73 68 Q77 64 81 68" fill="none" stroke="#5c2440" stroke-width="3.2" stroke-linecap="round"/>
+
+  <!-- 鼻子 & 嘴 -->
+  <path d="M61 77 Q64 80 67 77 L64 81 Z" fill="#d1487e"/>
+  <path d="M58 84 Q61 87 64 84 Q67 87 70 84" fill="none" stroke="#5c2440" stroke-width="2.6" stroke-linecap="round"/>
+
+  <!-- 胡须 -->
+  <g stroke="#c9a9b8" stroke-width="2.2" stroke-linecap="round">
+    <line x1="40" y1="73" x2="22" y2="70"/>
+    <line x1="40" y1="79" x2="21" y2="79"/>
+    <line x1="40" y1="85" x2="23" y2="89"/>
+    <line x1="88" y1="73" x2="106" y2="70"/>
+    <line x1="88" y1="79" x2="107" y2="79"/>
+    <line x1="88" y1="85" x2="105" y2="89"/>
+  </g>
+
+  <!-- 腮红 -->
+  <circle cx="43" cy="84" r="5.5" fill="#ff8fa8" opacity="0.7"/>
+  <circle cx="85" cy="84" r="5.5" fill="#ff8fa8" opacity="0.7"/>
+
+  <!-- 领结（薰的蝴蝶结元素） -->
+  <path d="M52 104 L64 96 L76 104 L64 112 Z" fill="#e8508c"/>
+  <circle cx="64" cy="104" r="4.5" fill="#c21f5e"/>
+</svg>

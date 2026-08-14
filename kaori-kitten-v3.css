@@ -1,0 +1,644 @@
+/* ============================================================
+   kaori-kitten-v3.css — 「四月与小猫」(April & Kitten) 主题覆盖层 v3
+   配色（参考 01-kaori.jpg 薰立绘）：天蓝(校服/眼睛) + 暖金(金发)
+   + 柔粉(琴箱) + 奶油白(背景) + 祖母绿(小猫项圈)
+   实现原则：只覆盖真实的 --dsw-* 设计令牌（已逐个验证存在），
+   不使用任何虚构的 DOM 类名；装饰层元素由 kaori-overlay-v3.js 注入。
+   作用域化侧边栏（.kaori-sidebar-v3）由 JS 按运行时启发式打标，
+   找不到时不生效、不影响其余样式（安全回退）。
+   ============================================================ */
+
+/* ================= 亮色模式 ================= */
+body {
+  /* 梦幻渐变氛围（图1：古典浪漫的宫殿光感）——奶油白主导，天蓝轻点缀 */
+  background: radial-gradient(120% 90% at 18% 0%,
+    #fff3ea 0%, #fffaf0 42%, #eef4fc 100%) fixed;
+  /* 主背景令牌置透明，让 body 渐变透出（图2 的干净透明留白） */
+  --dsw-alias-bg-base: transparent !important;
+
+  /* ---- 品牌色阶：主色 天蓝 #87CEEB（薰校服/眼睛）---- */
+  --dsw-static-deepseek-50: #f0f8ff !important;
+  --dsw-static-deepseek-100: #e3f2fc !important;
+  --dsw-static-deepseek-200: #c8e7f9 !important;
+  --dsw-static-deepseek-300: #a8d9f5 !important;
+  --dsw-static-deepseek-400: #87ceeb !important;
+  --dsw-static-deepseek-450: #74c2e6 !important;
+  --dsw-static-deepseek-500: #63b6e0 !important;
+  --dsw-static-deepseek-600: #4fa3d3 !important;
+  --dsw-static-deepseek-800: #3a7fa8 !important;
+  --dsw-static-deepseek-900: #2e688c !important;
+
+  /* 薰的蓝眼睛（同色系更浅一档） */
+  --dsw-static-blue-50: #f5f9ff !important;
+  --dsw-static-blue-75: #eaf4ff !important;
+  --dsw-static-blue-100: #dfeeff !important;
+  --dsw-static-blue-300: #b3d5f7 !important;
+  --dsw-static-blue-400: #95c2ee !important;
+  --dsw-static-blue-450: #86b8e8 !important;
+  --dsw-static-blue-500: #76ade1 !important;
+  --dsw-static-blue-600: #6399d0 !important;
+  --dsw-static-blue-800: #47729f !important;
+  --dsw-static-blue-900: #385b80 !important;
+  --dsw-static-blue-950: #2a4763 !important;
+
+  /* 背景：奶油白 #FFFAF0 系（暖奶油主导，粉只做点缀）
+     layer-2 用渐变：设置面板等大面板呈现渐变，与主界面一致 */
+  --dsw-alias-bg-layer-1: #fdf5ea !important;
+  --dsw-alias-bg-layer-2: radial-gradient(120% 90% at 18% 0%, #fff3ea 0%, #fffaf0 42%, #eef4fc 100%) !important;
+  --dsw-alias-bg-layer-3: #f6ecdf !important;
+  --dsw-alias-bg-mask-1: rgba(255, 250, 240, 0.92) !important;
+  --dsw-alias-bg-mask-2: rgba(253, 245, 234, 0.96) !important;
+  --dsw-alias-bg-mask-3: rgba(250, 241, 229, 0.97) !important;
+  --dsw-alias-bg-mask-drop: rgba(26, 26, 46, 0.35) !important;
+  --dsw-alias-bg-mask-photo: rgba(26, 26, 46, 0.45) !important;
+  --dsw-alias-bg-module-platform: #ffffff !important;
+  --dsw-alias-bg-overlay: rgba(26, 26, 46, 0.45) !important;
+  --dsw-alias-bg-skeleton: #f3ecdf !important;
+  --dsw-alias-bg-multi-select: #fdf3e0 !important;
+
+  /* 边框：辅色 暖金 #FFD700 系 */
+  --dsw-alias-border-l1: #f7ebc4 !important;
+  --dsw-alias-border-l2: #f0dfa8 !important;
+  --dsw-alias-border-l2-darkmode-thin: #f0dfa8 !important;
+  --dsw-alias-border-l3: #e8d089 !important;
+  --dsw-alias-border-l4: #dfc06c !important;
+  --dsw-alias-border-inverted: #1a1a2e !important;
+  --dsw-alias-border-inverted2: #2e3a5c !important;
+
+  /* 品牌与主色：天蓝 #87CEEB（文字用同色系深阶保对比度） */
+  --dsw-alias-brand-primary: #87ceeb !important;
+  --dsw-alias-brand-primary-invert: #fffaf0 !important;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #87ceeb !important;
+  --dsw-alias-brand-text: #2e8bc0 !important;
+
+  /* 文字：深蓝灰（中性色，保证可读性） */
+  --dsw-alias-label-primary: #22303f !important;
+  --dsw-alias-label-primary-bluish: #2e4057 !important;
+  --dsw-alias-label-primary-dimmed: #52647a !important;
+  --dsw-alias-label-primary-foreground: #ffffff !important;
+  --dsw-alias-label-primary-inverted: #fffaf0 !important;
+  --dsw-alias-label-secondary: #4c5f75 !important;
+  --dsw-alias-label-tertiary: #52647a !important;
+  --dsw-alias-label-caption: #52647a !important;
+  --dsw-alias-label-dimmed: #75849a !important;
+
+  /* 按钮：天蓝主色（加深可读阶，白字清晰）+ 金色 hover */
+  --dsw-alias-button-primary-fill: #3f92c4 !important;
+  --dsw-alias-button-primary-hover: #4aa0d0 !important;
+  --dsw-alias-button-primary-dimmed: #a8d9f5 !important;
+  --dsw-alias-button-contrast-fill: #2e688c !important;
+  --dsw-alias-button-elevated-fill: #ffffff !important;
+  --dsw-alias-button-floating-fill: #ffffff !important;
+  --dsw-alias-button-floating-hover: #fdf4e8 !important;
+  --dsw-alias-button-ghost-active-fill: #fff3d6 !important;
+  --dsw-alias-button-ghost-active-hover: #ffe9c0 !important;
+  --dsw-alias-button-ghost-active-border: #e8d089 !important;
+  --dsw-alias-button-info-fill: #eaf5fd !important;
+  --dsw-alias-button-info-hover: #dceef9 !important;
+  --dsw-alias-button-tool-bar-fill: #fffaf0 !important;
+  --dsw-alias-button-tool-bar-fill-invisible: transparent !important;
+  --dsw-alias-button-tool-bar-hover: #fdf4e8 !important;
+
+  /* 交互态：天蓝底 + 暖金高光 */
+  --dsw-alias-interactive-bg-active: #d6ecfa !important;
+  --dsw-alias-interactive-bg-hover: #f0f8fd !important;
+  --dsw-alias-interactive-bg-hover-accent: #fff0c8 !important;
+  --dsw-alias-interactive-bg-hover-solid: #ffd700 !important;
+
+  /* 滚动条：天蓝 → 暖金 hover */
+  --dsw-alias-scrollbar-bg-l1: #d6ecfa !important;
+  --dsw-alias-scrollbar-bg-l2: #bfe0f5 !important;
+  --dsw-alias-scrollbar-hover-l1: #ffd700 !important;
+  --dsw-alias-scrollbar-hover-l2: #e8c200 !important;
+
+  /* Markdown 细节：奶油 + 淡金 + 柔粉点缀 */
+  --dsw-alias-markdown-inline-code: #eaf5fd !important;
+  --dsw-alias-markdown-code-block: #fdf8ee !important;
+  --dsw-alias-markdown-code-block-banner: #f8f0de !important;
+  --dsw-alias-markdown-code-segment-selected: #f4e8cc !important;
+  --dsw-alias-markdown-code-segment-unselected: rgba(34, 48, 63, 0.06) !important;
+  --dsw-alias-markdown-placeholder: #aebbc8 !important;
+  --dsw-alias-markdown-tag: #ffe9ee !important;
+  --dsw-alias-markdown-citation: #fff8ea !important;
+
+  /* 浮层：深蓝底（图1 华美基调） */
+  --dsw-alias-toast-bg: #1a1a2e !important;
+  --dsw-alias-tooltip-bg: #1a1a2e !important;
+
+  /* 状态色：祖母绿成功 #50C878 / 暖金警告 / 玫瑰错误 */
+  --dsw-alias-state-success-primary: #50c878 !important;
+  --dsw-alias-state-error-primary: #d94a5e !important;
+  --dsw-alias-state-warn-primary: #e8a33d !important;
+  --dsw-alias-state-warn-secondary: #ffd700 !important;
+  --dsw-alias-state-warn-label: #a06a16 !important;
+  --dsw-alias-state-warn-tertiary: #fdf0d8 !important;
+  --dsw-alias-state-business-primary: #4fa3d3 !important;
+
+  /* 阴影：暖金色调（最佳努力，不影响功能） */
+  --dsw-shadow-lv2: 0 6px 24px rgba(255, 215, 0, 0.14) !important;
+  --dsw-shadow-lv3: 0 12px 40px rgba(26, 26, 46, 0.18) !important;
+
+  /* 侧边栏与专用面：亮色回退为暖奶油；深蓝金边由 .kaori-sidebar-v3 作用域覆盖 */
+  --dsw-specific-sidebar-fill: #fbf4e4 !important;
+  --dsw-specific-sidebar-nav-item-active: #f2e6c8 !important;
+  --dsw-specific-sidebar-nav-item-active-accent: #ffd700 !important;
+  --dsw-specific-sidebar-nav-item-hover: #fdf6ea !important;
+  --dsw-specific-bubble: #eaf5fd !important;
+  --dsw-specific-bubble-highlight: #fff3d6 !important;
+  --dsw-specific-input-major: #ffffff !important;
+  --dsw-specific-login-input: #ffffff !important;
+  --dsw-specific-menu: #ffffff !important;
+  --dsw-specific-selector: #ffffff !important;
+  --dsw-specific-tip: #fff7e6 !important;
+}
+
+/* ================= 暗色模式：夜蓝 × 暖金 ================= */
+body[data-ds-dark-theme] {
+  /* 夜蓝渐变氛围（图1 的暗色宫殿感） */
+  background: radial-gradient(120% 90% at 18% 0%,
+    #1b2a3d 0%, #151a24 50%, #1d2333 100%) fixed;
+  --dsw-alias-bg-base: transparent !important;
+
+  --dsw-static-deepseek-50: #1e2a3a !important;
+  --dsw-static-deepseek-100: #24344a !important;
+  --dsw-static-deepseek-200: #2c4060 !important;
+  --dsw-static-deepseek-300: #3a5478 !important;
+  --dsw-static-deepseek-400: #4a6b93 !important;
+  --dsw-static-deepseek-450: #567ba4 !important;
+  --dsw-static-deepseek-500: #648bb4 !important;
+  --dsw-static-deepseek-600: #74a0c9 !important;
+  --dsw-static-deepseek-800: #87ceeb !important;
+  --dsw-static-deepseek-900: #6fb5e3 !important;
+
+  --dsw-static-blue-50: #1c2838 !important;
+  --dsw-static-blue-75: #22344a !important;
+  --dsw-static-blue-100: #28405e !important;
+  --dsw-static-blue-300: #47709a !important;
+  --dsw-static-blue-400: #5f88b5 !important;
+  --dsw-static-blue-450: #6c96c4 !important;
+  --dsw-static-blue-500: #7aa5d2 !important;
+  --dsw-static-blue-600: #8bb6e0 !important;
+  --dsw-static-blue-800: #5f88b5 !important;
+  --dsw-static-blue-900: #5078a2 !important;
+  --dsw-static-blue-950: #416181 !important;
+
+  --dsw-alias-bg-layer-1: #1b2230 !important;
+  --dsw-alias-bg-layer-2: radial-gradient(120% 90% at 18% 0%, #1b2a3d 0%, #151a24 50%, #1d2333 100%) !important;
+  --dsw-alias-bg-layer-3: #28344a !important;
+  --dsw-alias-bg-mask-1: rgba(21, 26, 36, 0.92) !important;
+  --dsw-alias-bg-mask-2: rgba(27, 34, 48, 0.96) !important;
+  --dsw-alias-bg-mask-3: rgba(33, 43, 60, 0.97) !important;
+  --dsw-alias-bg-mask-drop: rgba(0, 0, 0, 0.45) !important;
+  --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.5) !important;
+  --dsw-alias-bg-module-platform: #1b2230 !important;
+  --dsw-alias-bg-overlay: rgba(0, 0, 0, 0.5) !important;
+  --dsw-alias-bg-skeleton: #2a3b4e !important;
+  --dsw-alias-bg-multi-select: #22303f !important;
+
+  --dsw-alias-border-l1: #2b3850 !important;
+  --dsw-alias-border-l2: #34445f !important;
+  --dsw-alias-border-l2-darkmode-thin: #34445f !important;
+  --dsw-alias-border-l3: #3e5070 !important;
+  --dsw-alias-border-l4: #485d80 !important;
+  --dsw-alias-border-inverted: #fffaf0 !important;
+  --dsw-alias-border-inverted2: #f0e4cc !important;
+
+  --dsw-alias-brand-primary: #87ceeb !important;
+  --dsw-alias-brand-primary-invert: #151a24 !important;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #87ceeb !important;
+  --dsw-alias-brand-text: #87ceeb !important;
+
+  --dsw-alias-label-primary: #e8eef6 !important;
+  --dsw-alias-label-primary-bluish: #d6e2f0 !important;
+  --dsw-alias-label-primary-dimmed: #c2d0e0 !important;
+  --dsw-alias-label-primary-foreground: #151a24 !important;
+  --dsw-alias-label-primary-inverted: #151a24 !important;
+  --dsw-alias-label-secondary: #9fb2c8 !important;
+  --dsw-alias-label-tertiary: #7e93ab !important;
+  --dsw-alias-label-caption: #7e93ab !important;
+  --dsw-alias-label-dimmed: #5a6e86 !important;
+
+  --dsw-alias-button-primary-fill: #63b6e0 !important;
+  --dsw-alias-button-primary-hover: #74c2e6 !important;
+  --dsw-alias-button-primary-dimmed: #43607f !important;
+  --dsw-alias-button-contrast-fill: #a8d9f5 !important;
+  --dsw-alias-button-elevated-fill: #212b3c !important;
+  --dsw-alias-button-floating-fill: #1b2230 !important;
+  --dsw-alias-button-floating-hover: #28344a !important;
+  --dsw-alias-button-ghost-active-fill: #28344a !important;
+  --dsw-alias-button-ghost-active-hover: #34445f !important;
+  --dsw-alias-button-ghost-active-border: #3e5070 !important;
+  --dsw-alias-button-info-fill: #22303f !important;
+  --dsw-alias-button-info-hover: #2a3b4e !important;
+  --dsw-alias-button-tool-bar-fill: #1b2230 !important;
+  --dsw-alias-button-tool-bar-fill-invisible: transparent !important;
+  --dsw-alias-button-tool-bar-hover: #28344a !important;
+
+  --dsw-alias-interactive-bg-active: #34445f !important;
+  --dsw-alias-interactive-bg-hover: #28344a !important;
+  --dsw-alias-interactive-bg-hover-accent: #3e5070 !important;
+  --dsw-alias-interactive-bg-hover-solid: #ffd700 !important;
+
+  --dsw-alias-scrollbar-bg-l1: #34445f !important;
+  --dsw-alias-scrollbar-bg-l2: #3e5070 !important;
+  --dsw-alias-scrollbar-hover-l1: #ffd700 !important;
+  --dsw-alias-scrollbar-hover-l2: #e8c200 !important;
+
+  --dsw-alias-markdown-inline-code: #2a3b4e !important;
+  --dsw-alias-markdown-code-block: #1b2230 !important;
+  --dsw-alias-markdown-code-block-banner: #212b3c !important;
+  --dsw-alias-markdown-code-segment-selected: #34445f !important;
+  --dsw-alias-markdown-code-segment-unselected: rgba(232, 238, 246, 0.06) !important;
+  --dsw-alias-markdown-placeholder: #5a6e86 !important;
+  --dsw-alias-markdown-tag: #2a3b4e !important;
+  --dsw-alias-markdown-citation: #1b2230 !important;
+
+  --dsw-alias-toast-bg: #0e1219 !important;
+  --dsw-alias-tooltip-bg: #0e1219 !important;
+
+  --dsw-alias-state-success-primary: #50c878 !important;
+  --dsw-alias-state-error-primary: #e06a80 !important;
+  --dsw-alias-state-warn-primary: #e8b45a !important;
+  --dsw-alias-state-warn-secondary: #ffd700 !important;
+  --dsw-alias-state-warn-label: #f2d9a0 !important;
+  --dsw-alias-state-warn-tertiary: #2a3b4e !important;
+  --dsw-alias-state-business-primary: #87ceeb !important;
+
+  --dsw-shadow-lv2: 0 6px 24px rgba(0, 0, 0, 0.4) !important;
+  --dsw-shadow-lv3: 0 12px 40px rgba(0, 0, 0, 0.55) !important;
+
+  --dsw-specific-sidebar-fill: #10141c !important;
+  --dsw-specific-sidebar-nav-item-active: #1b2230 !important;
+  --dsw-specific-sidebar-nav-item-active-accent: #ffd700 !important;
+  --dsw-specific-sidebar-nav-item-hover: #1e2733 !important;
+  --dsw-specific-bubble: #1e2733 !important;
+  --dsw-specific-bubble-highlight: #2a3b4e !important;
+  --dsw-specific-input-major: #151a24 !important;
+  --dsw-specific-login-input: #151a24 !important;
+  --dsw-specific-menu: #1b2230 !important;
+  --dsw-specific-selector: #151a24 !important;
+  --dsw-specific-tip: #212b3c !important;
+}
+
+/* ================= 可爱细节 ================= */
+::selection {
+  background: #ffe9c9;
+  color: #22303f;
+}
+body[data-ds-dark-theme] ::selection {
+  background: #43607f;
+  color: #e8eef6;
+}
+
+/* ================= 精致控件（图1 的定制感：圆角 + 金色柔光，克制不挡功能）================= */
+button,
+input,
+textarea,
+select {
+  border-radius: 10px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.22);
+}
+button:focus-visible {
+  outline: 2px solid rgba(218, 165, 32, 0.55);
+  outline-offset: 1px;
+}
+
+/* 发送/停止按钮：源码用浅色 info-fill + 白字（几乎看不见），
+   用稳定的 aria-label 钩子精准加深为天蓝可读阶 */
+button[aria-label="发送消息"],
+button[aria-label="Send message"],
+button[aria-label="停止"],
+button[aria-label="Stop"] {
+  background: #3f92c4 !important;
+  color: #ffffff !important;
+}
+button[aria-label="发送消息"]:hover:not(:disabled),
+button[aria-label="Send message"]:hover:not(:disabled),
+button[aria-label="停止"]:hover:not(:disabled),
+button[aria-label="Stop"]:hover:not(:disabled) {
+  background: #4aa0d0 !important;
+}
+
+/* ================= 樱花瓣（JS 注入 #kaori-petals）================= */
+#kaori-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  overflow: hidden;
+}
+.kaori-petal {
+  position: absolute;
+  top: -6vh;
+  border-radius: 100% 6px 100% 6px / 100% 10px 100% 10px;
+  opacity: 0.45;
+  animation: kaori-fall var(--fall-duration, 12s) linear var(--fall-delay, 0s) infinite;
+  will-change: transform;
+}
+/* 花瓣三色：天蓝 / 柔粉 / 暖金（薰图背景渐变取色） */
+.kaori-petal[data-kind="sky"] {
+  background: radial-gradient(circle at 32% 30%, #cde9fb, #9fd0f0 58%, #7fbfe8);
+}
+.kaori-petal[data-kind="pink"] {
+  background: radial-gradient(circle at 32% 30%, #ffd9e2, #ffb8c9 58%, #ff9fb6);
+}
+.kaori-petal[data-kind="gold"] {
+  background: radial-gradient(circle at 32% 30%, #ffedb8, #ffd97a 58%, #f5c542);
+}
+@keyframes kaori-fall {
+  0% {
+    transform: translate3d(0, -6vh, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(calc(var(--sway, 20px) * -1), 24vh, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate3d(var(--sway, 20px), 50vh, 0) rotate(180deg);
+  }
+  75% {
+    transform: translate3d(calc(var(--sway, 20px) * -0.6), 74vh, 0) rotate(270deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 108vh, 0) rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kaori-petal {
+    display: none;
+  }
+}
+
+/* ================= 右上角：薰小立绘（01-kaori.jpg，图2 式角落点缀）================= */
+/* ================= 右侧中部：薰立绘 + 小猫（放留白区，整组点击穿透）================= */
+.kaori-companions {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2147483001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  pointer-events: none; /* 整组不挡对话 */
+}
+#kaori-card,
+#kaori-cat {
+  pointer-events: auto; /* 头像本身可点击 */
+}
+#kaori-card {
+  width: 96px;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+  animation: kaori-float 3.2s ease-in-out infinite;
+}
+#kaori-card img {
+  width: 96px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.55), 0 6px 20px rgba(78, 143, 194, 0.25);
+  background: #eaf5fd;
+}
+#kaori-card .kaori-caption {
+  margin-top: 6px;
+  font: 11px/1.5 system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+  color: #64778d;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+body[data-ds-dark-theme] #kaori-card img {
+  border-color: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 2px rgba(201, 168, 78, 0.6), 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+body[data-ds-dark-theme] #kaori-card .kaori-caption {
+  color: #9fb2c8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+@keyframes kaori-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ================= 小猫头像（02-cat.jpg，祖母绿项圈描边）================= */
+#kaori-cat {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #50c878;
+  box-shadow: 0 0 14px rgba(80, 200, 120, 0.45), 0 4px 12px rgba(0, 0, 0, 0.16);
+  background: #ffffff;
+  cursor: default;
+  user-select: none;
+  overflow: hidden;
+  animation: cat-breathe 3s ease-in-out infinite;
+}
+#kaori-cat img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+body[data-ds-dark-theme] #kaori-cat {
+  border-color: #4fc58a;
+}
+@keyframes cat-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* ================= 高能区能量条（效果图B 概念，JS 注入）================= */
+.kaori-energy {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147482990;
+  width: 240px;
+  height: 8px;
+  box-sizing: border-box;
+  border: 2px double #e8c76a;
+  border-radius: 5px;
+  background: rgba(26, 26, 46, 0.07);
+  pointer-events: none;
+  overflow: hidden;
+}
+.kaori-energy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7fbfe8 0%, #f5c542 55%, #ff9fb6 100%);
+  border-radius: 3px;
+  width: 8%;
+  transition: width 0.6s ease;
+  animation: energy-pulse 2s ease-in-out infinite;
+}
+.kaori-energy .kaori-energy-note {
+  position: absolute;
+  right: -24px;
+  top: -3px;
+  font-size: 14px;
+  line-height: 1;
+}
+body[data-ds-dark-theme] .kaori-energy {
+  background: rgba(255, 255, 255, 0.06);
+}
+@keyframes energy-pulse {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+/* ================= 顶部台词（页面中部顶端，JS 注入）================= */
+.kaori-top-caption {
+  flex: none;
+  font: italic 13px/1.6 Georgia, "Times New Roman", "Segoe UI", "Microsoft YaHei", sans-serif;
+  color: #52647a;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+}
+body[data-ds-dark-theme] .kaori-top-caption {
+  color: #9fb2c8;
+}
+/* 顶部居中的固定容器（台词 + 开关）——偏右、偏下 */
+.kaori-top-decor {
+  position: fixed;
+  top: 40px;
+  left: 58%;
+  transform: translateX(-50%);
+  z-index: 2147483002;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none; /* 整组点击穿透 */
+}
+.kaori-top-decor .kaori-theme-toggle {
+  pointer-events: auto; /* 开关本身可点 */
+}
+/* 主题关闭时隐藏台词（开关保留以便重新开启） */
+body.kaori-theme-off .kaori-top-caption {
+  display: none !important;
+}
+/* 极窄窗口时隐藏台词，避免挤压 */
+@media (max-width: 760px) {
+  .kaori-top-caption {
+    display: none;
+  }
+}
+
+/* ================= 主题开关（🎻 按钮，JS 注入）================= */
+.kaori-theme-toggle {
+  position: fixed;
+  top: 84px;
+  right: 14px;
+  z-index: 2147483002;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700 0%, #f5a623 100%);
+  color: #5a3e00;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.kaori-theme-toggle:hover {
+  transform: scale(1.08);
+}
+body.kaori-theme-off .kaori-theme-toggle {
+  transform: rotate(180deg);
+  filter: grayscale(100%);
+}
+
+/* ================= 主题关闭态（JS 切 body.kaori-theme-off）================= */
+body.kaori-theme-off #kaori-petals,
+body.kaori-theme-off .kaori-companions,
+body.kaori-theme-off .kaori-energy {
+  display: none !important;
+}
+
+/* ================= 右侧面板打开时，隐藏右缘立绘/小猫，避免重叠 ================= */
+body.kaori-details-open .kaori-companions {
+  display: none !important;
+}
+
+/* ================= 模态浮层打开时（设置/图片预览等），隐藏顶部台词装饰 =================
+   JS 检测 [role="dialog"][aria-modal="true"] 出现 → body 打 .kaori-modal-open 标，
+   顶部台词（含 🎻 开关）不再浮在设置等浮层之上。 */
+body.kaori-modal-open .kaori-top-decor {
+  display: none !important;
+}
+
+/* ================= 自动化看板视图（dsh-automation 插件）：隐藏底部输入框 =================
+   切到「自动化」标签时 JS 给 body 打 .kaori-automation-view 标。
+   composer 座位（输入框容器）是对话视图的常驻元素，这里整体隐藏，
+   并把自动化看板的底部留白从「给输入框让位」调整为正常留白。 */
+body.kaori-automation-view [data-composer-seat] {
+  display: none !important;
+}
+body.kaori-automation-view .dsh-automation-shell {
+  padding-bottom: 36px !important;
+}
+
+/* ================= 作用域化侧边栏（效果图A：深蓝 + 金边 + 金色下划线）
+   由 JS 运行时启发式找到侧边栏容器并打 .kaori-sidebar-v3 标。
+   找不到时不生效，不影响其他样式。================= */
+.kaori-sidebar-v3 {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%) !important;
+  border-right: 2px solid #daa520 !important;
+  box-shadow: 2px 0 10px rgba(218, 165, 32, 0.25);
+  /* 作用域内重映射令牌：深底浅字，不影响中央区 */
+  --dsw-alias-label-primary: #e8e8e8 !important;
+  --dsw-alias-label-primary-bluish: #d4d4e0 !important;
+  --dsw-alias-label-primary-dimmed: #c0c0d0 !important;
+  --dsw-alias-label-secondary: #aab4c8 !important;
+  --dsw-alias-label-tertiary: #8a94a8 !important;
+  --dsw-alias-label-caption: #8a94a8 !important;
+  --dsw-alias-label-dimmed: #6a7488 !important;
+  --dsw-alias-button-elevated-fill: #1e2740 !important;
+  --dsw-alias-button-floating-fill: #1e2740 !important;
+  --dsw-alias-button-floating-hover: #2a3560 !important;
+  --dsw-alias-interactive-bg-hover: rgba(255, 215, 0, 0.12) !important;
+  --dsw-alias-interactive-bg-active: rgba(255, 215, 0, 0.18) !important;
+  --dsw-alias-border-l2: rgba(218, 165, 32, 0.35) !important;
+  --dsw-alias-scrollbar-bg-l2: rgba(218, 165, 32, 0.25) !important;
+  --dsw-alias-scrollbar-hover-l2: #daa520 !important;
+}
+/* 侧边栏内的按钮（会话项/折叠钮/底部操作）金色下划线动画 */
+.kaori-sidebar-v3 button {
+  position: relative;
+  border-radius: 8px;
+}
+.kaori-sidebar-v3 button::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #ffd700, #ffe55c);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+.kaori-sidebar-v3 button:hover::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .kaori-sidebar-v3 button::after {
+    transition: none;
+  }
+}

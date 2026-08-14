@@ -1,0 +1,7 @@
+# 本机 dsh 原版前端备份（含原版 index.html / favicon / manifest），不发布
+backup/
+
+# 通用
+node_modules/
+*.log
+.DS_Store

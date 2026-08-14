@@ -1,0 +1,357 @@
+/* ============================================================
+   kaori-kitten.css — 「宫园薰 × 小猫」主题覆盖层 v2
+   配色：明亮樱粉（薰的裙子）+ 薰的蓝眼睛点缀
+   布局：右上角薰主题画卡 + 左下角小猫头像（都不挡对话框）
+   ============================================================ */
+
+/* ---------- 亮色模式：明亮樱粉 × 猫咪奶油 ---------- */
+body {
+  /* 品牌粉（薰的裙子色系，明亮版） */
+  --dsw-static-deepseek-50: #fff1f6;
+  --dsw-static-deepseek-100: #ffe4ee;
+  --dsw-static-deepseek-200: #ffd2e1;
+  --dsw-static-deepseek-300: #ffb8d0;
+  --dsw-static-deepseek-400: #ff8fb0;
+  --dsw-static-deepseek-450: #ff7ca3;
+  --dsw-static-deepseek-500: #f96e98;
+  --dsw-static-deepseek-600: #e8508c;
+  --dsw-static-deepseek-800: #b23a6b;
+  --dsw-static-deepseek-900: #8f2f58;
+  /* 薰的蓝眼睛（链接/信息色，提亮整体） */
+  --dsw-static-blue-50: #f0f8ff;
+  --dsw-static-blue-75: #e6f4ff;
+  --dsw-static-blue-100: #dceeff;
+  --dsw-static-blue-300: #a8d4f5;
+  --dsw-static-blue-400: #7fb8e8;
+  --dsw-static-blue-450: #6faedd;
+  --dsw-static-blue-500: #5fa3d4;
+  --dsw-static-blue-600: #4e8fc2;
+  --dsw-static-blue-800: #3a6e96;
+  --dsw-static-blue-900: #2e5778;
+  --dsw-static-blue-950: #23435c;
+
+  /* 背景：几乎纯白 + 极淡樱粉 */
+  --dsw-alias-bg-base: #fffbfd;
+  --dsw-alias-bg-layer-1: #fff5f9;
+  --dsw-alias-bg-layer-2: #ffeef4;
+  --dsw-alias-bg-layer-3: #ffe7ef;
+  --dsw-alias-bg-mask-1: rgba(255, 251, 253, 0.92);
+  --dsw-alias-bg-mask-2: rgba(255, 245, 249, 0.96);
+  --dsw-alias-bg-mask-3: rgba(255, 238, 244, 0.97);
+  --dsw-alias-bg-mask-drop: rgba(74, 53, 64, 0.35);
+  --dsw-alias-bg-mask-photo: rgba(74, 53, 64, 0.45);
+  --dsw-alias-bg-module-platform: #ffffff;
+  --dsw-alias-bg-overlay: rgba(74, 53, 64, 0.45);
+  --dsw-alias-bg-skeleton: #f8e2ec;
+  --dsw-alias-bg-multi-select: #ffedf4;
+
+  /* 边框：浅樱粉 */
+  --dsw-alias-border-l1: #ffe3ec;
+  --dsw-alias-border-l2: #ffd6e3;
+  --dsw-alias-border-l2-darkmode-thin: #ffd6e3;
+  --dsw-alias-border-l3: #ffc6d9;
+  --dsw-alias-border-l4: #ffb4cc;
+  --dsw-alias-border-inverted: #4a3540;
+  --dsw-alias-border-inverted2: #6b4a5b;
+
+  /* 品牌与主色 */
+  --dsw-alias-brand-primary: #e0467c;
+  --dsw-alias-brand-primary-invert: #fff5f9;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #ff6f9e;
+  --dsw-alias-brand-text: #e0467c;
+
+  /* 文字：暖梅灰 */
+  --dsw-alias-label-primary: #4a3540;
+  --dsw-alias-label-primary-bluish: #5d4652;
+  --dsw-alias-label-primary-dimmed: #7a5a6a;
+  --dsw-alias-label-primary-foreground: #ffffff;
+  --dsw-alias-label-primary-inverted: #fff5f9;
+  --dsw-alias-label-secondary: #977283;
+  --dsw-alias-label-tertiary: #b08fa0;
+  --dsw-alias-label-caption: #b08fa0;
+  --dsw-alias-label-dimmed: #c9a9b8;
+
+  /* 按钮 */
+  --dsw-alias-button-primary-fill: #e8508c;
+  --dsw-alias-button-primary-hover: #d63f7d;
+  --dsw-alias-button-primary-dimmed: #ffb8d0;
+  --dsw-alias-button-contrast-fill: #c21f5e;
+  --dsw-alias-button-elevated-fill: #fff5f9;
+  --dsw-alias-button-floating-fill: #ffffff;
+  --dsw-alias-button-floating-hover: #ffeef4;
+  --dsw-alias-button-ghost-active-fill: #ffe7ef;
+  --dsw-alias-button-ghost-active-hover: #ffdce8;
+  --dsw-alias-button-ghost-active-border: #ffc6d9;
+  --dsw-alias-button-info-fill: #eef6fd;
+  --dsw-alias-button-info-hover: #e0effb;
+  --dsw-alias-button-tool-bar-fill: #fffbfd;
+  --dsw-alias-button-tool-bar-fill-invisible: transparent;
+  --dsw-alias-button-tool-bar-hover: #ffeef4;
+
+  /* 交互态 */
+  --dsw-alias-interactive-bg-active: #ffdce8;
+  --dsw-alias-interactive-bg-hover: #fff0f6;
+  --dsw-alias-interactive-bg-hover-accent: #ffb8d0;
+  --dsw-alias-interactive-bg-hover-solid: #f96e98;
+
+  /* 滚动条：粉 */
+  --dsw-alias-scrollbar-bg-l1: #ffd6e3;
+  --dsw-alias-scrollbar-bg-l2: #ffc6d9;
+  --dsw-alias-scrollbar-hover-l1: #ffb4cc;
+  --dsw-alias-scrollbar-hover-l2: #f79fbc;
+
+  /* Markdown 细节 */
+  --dsw-alias-markdown-inline-code: #fde8f0;
+  --dsw-alias-markdown-code-block: #fff5f9;
+  --dsw-alias-markdown-code-block-banner: #ffe7ef;
+  --dsw-alias-markdown-code-segment-selected: #ffdce8;
+  --dsw-alias-markdown-code-segment-unselected: rgba(74, 53, 64, 0.06);
+  --dsw-alias-markdown-placeholder: #c9a9b8;
+  --dsw-alias-markdown-tag: #ffedf4;
+  --dsw-alias-markdown-citation: #fff5f9;
+
+  /* 浮层 */
+  --dsw-alias-toast-bg: #4a3540;
+  --dsw-alias-tooltip-bg: #4a3540;
+
+  /* 侧边栏与专用面 */
+  --dsw-specific-sidebar-fill: #fff1f7;
+  --dsw-specific-sidebar-nav-item-active: #ffe6ef;
+  --dsw-specific-sidebar-nav-item-active-accent: #f96e98;
+  --dsw-specific-sidebar-nav-item-hover: #fff6fa;
+  --dsw-specific-bubble: #fff0f6;
+  --dsw-specific-bubble-highlight: #ffdce8;
+  --dsw-specific-input-major: #ffffff;
+  --dsw-specific-login-input: #ffffff;
+  --dsw-specific-menu: #ffffff;
+  --dsw-specific-selector: #ffffff;
+  --dsw-specific-tip: #ffe7ef;
+}
+
+/* ---------- 暗色模式：夜樱粉紫（比之前明亮） ---------- */
+body[data-ds-dark-theme] {
+  --dsw-static-deepseek-50: #3a2433;
+  --dsw-static-deepseek-100: #4a2e3e;
+  --dsw-static-deepseek-200: #6b3a52;
+  --dsw-static-deepseek-300: #8e4a6b;
+  --dsw-static-deepseek-400: #c2608c;
+  --dsw-static-deepseek-450: #ff9ebc;
+  --dsw-static-deepseek-500: #ff87ae;
+  --dsw-static-deepseek-600: #e86a95;
+  --dsw-static-deepseek-800: #a44a72;
+  --dsw-static-deepseek-900: #7e3a5b;
+  --dsw-static-blue-50: #2e3a4a;
+  --dsw-static-blue-75: #334150;
+  --dsw-static-blue-100: #36475c;
+  --dsw-static-blue-300: #5f7fa0;
+  --dsw-static-blue-400: #7fa8cc;
+  --dsw-static-blue-450: #8fb8dd;
+  --dsw-static-blue-500: #9cc4e8;
+  --dsw-static-blue-600: #b0d2ef;
+  --dsw-static-blue-800: #5f86ac;
+  --dsw-static-blue-900: #4a6b8c;
+  --dsw-static-blue-950: #3a5470;
+
+  --dsw-alias-bg-base: #2a1e26;
+  --dsw-alias-bg-layer-1: #34242f;
+  --dsw-alias-bg-layer-2: #3e2b38;
+  --dsw-alias-bg-layer-3: #483242;
+  --dsw-alias-bg-mask-1: rgba(42, 30, 38, 0.92);
+  --dsw-alias-bg-mask-2: rgba(52, 36, 47, 0.96);
+  --dsw-alias-bg-mask-3: rgba(62, 43, 56, 0.97);
+  --dsw-alias-bg-mask-drop: rgba(0, 0, 0, 0.45);
+  --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.5);
+  --dsw-alias-bg-module-platform: #34242f;
+  --dsw-alias-bg-overlay: rgba(0, 0, 0, 0.5);
+  --dsw-alias-bg-skeleton: #4a3244;
+  --dsw-alias-bg-multi-select: #3a2433;
+
+  --dsw-alias-border-l1: #4a3244;
+  --dsw-alias-border-l2: #583d51;
+  --dsw-alias-border-l2-darkmode-thin: #583d51;
+  --dsw-alias-border-l3: #66495e;
+  --dsw-alias-border-l4: #74566b;
+  --dsw-alias-border-inverted: #fff1f7;
+  --dsw-alias-border-inverted2: #ffe4ee;
+
+  --dsw-alias-brand-primary: #ff9ebc;
+  --dsw-alias-brand-primary-invert: #2a1e26;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #ff9ebc;
+  --dsw-alias-brand-text: #ff9ebc;
+
+  --dsw-alias-label-primary: #f7e9ef;
+  --dsw-alias-label-primary-bluish: #ebd9e2;
+  --dsw-alias-label-primary-dimmed: #dcc3cf;
+  --dsw-alias-label-primary-foreground: #2a1e26;
+  --dsw-alias-label-primary-inverted: #2a1e26;
+  --dsw-alias-label-secondary: #cdafbe;
+  --dsw-alias-label-tertiary: #a68a99;
+  --dsw-alias-label-caption: #a68a99;
+  --dsw-alias-label-dimmed: #7e6575;
+
+  --dsw-alias-button-primary-fill: #ff9ebc;
+  --dsw-alias-button-primary-hover: #ffb3ca;
+  --dsw-alias-button-primary-dimmed: #8e4a6b;
+  --dsw-alias-button-contrast-fill: #d63f7d;
+  --dsw-alias-button-elevated-fill: #3e2b38;
+  --dsw-alias-button-floating-fill: #3e2b38;
+  --dsw-alias-button-floating-hover: #4a3244;
+  --dsw-alias-button-ghost-active-fill: #4a3244;
+  --dsw-alias-button-ghost-active-hover: #583d51;
+  --dsw-alias-button-ghost-active-border: #66495e;
+  --dsw-alias-button-info-fill: #26313f;
+  --dsw-alias-button-info-hover: #2e3a4a;
+  --dsw-alias-button-tool-bar-fill: #34242f;
+  --dsw-alias-button-tool-bar-fill-invisible: transparent;
+  --dsw-alias-button-tool-bar-hover: #4a3244;
+
+  --dsw-alias-interactive-bg-active: #583d51;
+  --dsw-alias-interactive-bg-hover: #4a3244;
+  --dsw-alias-interactive-bg-hover-accent: #6b3a52;
+  --dsw-alias-interactive-bg-hover-solid: #ff9ebc;
+
+  --dsw-alias-scrollbar-bg-l1: #583d51;
+  --dsw-alias-scrollbar-bg-l2: #66495e;
+  --dsw-alias-scrollbar-hover-l1: #74566b;
+  --dsw-alias-scrollbar-hover-l2: #8a6a8f;
+
+  --dsw-alias-markdown-inline-code: #4a2e3e;
+  --dsw-alias-markdown-code-block: #34242f;
+  --dsw-alias-markdown-code-block-banner: #3e2b38;
+  --dsw-alias-markdown-code-segment-selected: #583d51;
+  --dsw-alias-markdown-code-segment-unselected: rgba(247, 233, 239, 0.06);
+  --dsw-alias-markdown-placeholder: #7e6575;
+  --dsw-alias-markdown-tag: #3e2b38;
+  --dsw-alias-markdown-citation: #34242f;
+
+  --dsw-alias-toast-bg: #4a3244;
+  --dsw-alias-tooltip-bg: #4a3244;
+
+  --dsw-specific-sidebar-fill: #34242f;
+  --dsw-specific-sidebar-nav-item-active: #4a3244;
+  --dsw-specific-sidebar-nav-item-active-accent: #ff9ebc;
+  --dsw-specific-sidebar-nav-item-hover: #3e2b38;
+  --dsw-specific-bubble: #3e2b38;
+  --dsw-specific-bubble-highlight: #4a3244;
+  --dsw-specific-input-major: #2a1e26;
+  --dsw-specific-login-input: #2a1e26;
+  --dsw-specific-menu: #34242f;
+  --dsw-specific-selector: #2a1e26;
+  --dsw-specific-tip: #3e2b38;
+}
+
+/* ---------- 可爱细节 ---------- */
+::selection {
+  background: #ffb8d0;
+  color: #4a3540;
+}
+body[data-ds-dark-theme] ::selection {
+  background: #8e4a6b;
+  color: #f7e9ef;
+}
+
+/* 输入框 / 按钮的柔和圆角（可选打磨；出问题可单独删除本节） */
+button,
+input,
+textarea,
+select {
+  border-radius: 10px;
+}
+
+/* ---------- 漂浮樱花花瓣 ---------- */
+#kaori-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  overflow: hidden;
+}
+.kaori-petal {
+  position: absolute;
+  top: -6vh;
+  background: radial-gradient(circle at 32% 30%, #ffd6e4, #f9a8c4 58%, #f48fb1);
+  border-radius: 100% 6px 100% 6px / 100% 10px 100% 10px;
+  opacity: 0.5;
+  animation: kaori-fall var(--fall-duration, 12s) linear var(--fall-delay, 0s) infinite;
+  will-change: transform;
+}
+@keyframes kaori-fall {
+  0% {
+    transform: translate3d(0, -6vh, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(calc(var(--sway, 20px) * -1), 24vh, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate3d(var(--sway, 20px), 50vh, 0) rotate(180deg);
+  }
+  75% {
+    transform: translate3d(calc(var(--sway, 20px) * -0.6), 74vh, 0) rotate(270deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 108vh, 0) rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kaori-petal {
+    display: none;
+  }
+}
+
+/* ---------- 右上角：薰主题画卡（含台词，不挡对话框） ---------- */
+#kaori-card {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 2147483001;
+  width: 104px;
+  pointer-events: none;
+  user-select: none;
+  font: 11px/1.55 system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+  text-align: center;
+}
+#kaori-card img {
+  width: 104px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 24px rgba(224, 70, 124, 0.25);
+  background: #ffeef4;
+}
+#kaori-card .kaori-caption {
+  margin-top: 6px;
+  color: #977283;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+body[data-ds-dark-theme] #kaori-card img {
+  border-color: rgba(0, 0, 0, 0.45);
+}
+body[data-ds-dark-theme] #kaori-card .kaori-caption {
+  color: #cdafbe;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 左下角：小猫头像 ---------- */
+#kaori-cat {
+  position: fixed;
+  left: 14px;
+  bottom: 10px;
+  z-index: 2147483001;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 16px rgba(224, 70, 124, 0.3);
+  background: #ffffff;
+  pointer-events: none;
+  user-select: none;
+  object-fit: cover;
+}
+body[data-ds-dark-theme] #kaori-cat {
+  border-color: rgba(0, 0, 0, 0.45);
+}
