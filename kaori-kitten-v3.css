@@ -491,7 +491,7 @@ body[data-ds-dark-theme] .kaori-energy {
   50% { opacity: 1; }
 }
 
-/* ================= 顶部台词（页面中部顶端，JS 注入）================= */
+/* ================= 顶部台词（顶部偏右侧，JS 注入）================= */
 .kaori-top-caption {
   flex: none;
   font: italic 13px/1.6 Georgia, "Times New Roman", "Segoe UI", "Microsoft YaHei", sans-serif;
@@ -504,12 +504,15 @@ body[data-ds-dark-theme] .kaori-energy {
 body[data-ds-dark-theme] .kaori-top-caption {
   color: #9fb2c8;
 }
-/* 顶部居中的固定容器（台词 + 开关）——偏右、偏下 */
+/* 顶部偏右侧的固定容器（台词 + 开关）
+   放 top:48px / right:96px：避开头部行的「子代理/后台任务/Session log」按钮区（y≈12-44），
+   也不与右侧中部立绘（y 中部）冲突；台词组点击穿透，不挡按钮。 */
 .kaori-top-decor {
   position: fixed;
-  top: 40px;
-  left: 58%;
-  transform: translateX(-50%);
+  top: 48px;
+  right: 96px;
+  left: auto;
+  transform: none;
   z-index: 2147483002;
   display: flex;
   align-items: center;

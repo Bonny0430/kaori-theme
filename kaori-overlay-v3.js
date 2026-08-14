@@ -14,6 +14,10 @@
   var THEME_VERSION = 'v3';
   var IMAGES_PATH = '/assets/images/';
 
+  // ========== 台词文案（顶部与立绘下方各一份，可分别修改）==========
+  var TOP_CAPTION = '只要有你在，春天就不会结束';
+  var CARD_CAPTION = '再也没有你的春天，就要来了';
+
   // ========== 基础工具 ==========
   function ready(fn) {
     if (document.readyState === 'loading') {
@@ -63,7 +67,7 @@
 
     var cap = document.createElement('div');
     cap.className = 'kaori-caption';
-    cap.textContent = '只要有你在，春天就不会结束';
+    cap.textContent = CARD_CAPTION;
     card.appendChild(cap);
 
     host.appendChild(card);
@@ -186,11 +190,11 @@
     return btn;
   }
 
-  // ========== 顶部台词 + 开关（页面中部顶端，固定居中）==========
+  // ========== 顶部台词 + 开关（顶部偏右侧，避开头部按钮区）==========
   function placeHeaderDecor(toggle) {
     var cap = document.createElement('span');
     cap.className = 'kaori-top-caption';
-    cap.textContent = '只要有你在，春天就不会结束';
+    cap.textContent = TOP_CAPTION;
 
     var wrap = document.createElement('div');
     wrap.className = 'kaori-top-decor';
@@ -201,7 +205,7 @@
     toggle.style.fontSize = '15px';
     wrap.appendChild(toggle);
     document.body.appendChild(wrap);
-    console.log('[Kaori Theme v3] header caption centered ✓');
+    console.log('[Kaori Theme v3] header caption top-right ✓');
     return { row: null, cap: cap, toggle: toggle };
   }
 
